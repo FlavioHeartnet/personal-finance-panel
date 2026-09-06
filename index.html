@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3f1eb">
+<title>Painel Financeiro Pessoal</title>
+<style>
+:root {
+  --bg:#f3f1eb; --paper:#fbfaf6; --ink:#1d211e; --muted:#687069; --line:#d9d7d0;
+  --green:#2f6d50; --green2:#8faf99; --blue:#51728c; --amber:#b67a2f; --red:#a64f45;
+  --shadow:0 12px 40px rgba(31,34,31,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+.container{width:min(1180px,calc(100% - 36px));margin:auto}
+header{padding:26px 0 10px}
+nav{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}
+.brand{font-weight:700;letter-spacing:-.02em} .brand small{font-weight:500;color:var(--muted)}
+nav .links{display:flex;gap:14px;flex-wrap:wrap} nav a{color:var(--muted);text-decoration:none;font-size:13px}
+.hero{padding:70px 0 48px;display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:end}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:800}
+h1{font-size:clamp(46px,7vw,88px);line-height:.95;letter-spacing:-.065em;margin:14px 0 22px;max-width:820px}
+.hero p{max-width:730px;color:var(--muted);font-size:18px}
+.hero-note{border-left:2px solid var(--green);padding-left:18px;color:var(--muted);font-size:14px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.metric{padding:22px 18px 22px 0;border-right:1px solid var(--line)} .metric:not(:first-child){padding-left:18px} .metric:last-child{border-right:0}
+.metric span{display:block;color:var(--muted);font-size:12px;margin-bottom:8px} .metric strong{font-size:28px;letter-spacing:-.04em}
+section{padding:62px 0;border-bottom:1px solid var(--line)}
+.section-head{display:grid;grid-template-columns:.55fr 1.45fr;gap:34px;margin-bottom:28px}
+.section-head .n{color:var(--muted);font-size:12px} h2{font-size:clamp(32px,5vw,54px);line-height:1;letter-spacing:-.05em;margin:0 0 12px}
+.section-head p{color:var(--muted);max-width:760px;margin:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px} .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.panel{background:var(--paper);border:1px solid var(--line);padding:22px;box-shadow:var(--shadow)}
+.panel h3{margin:0 0 6px;font-size:18px;letter-spacing:-.02em} .panel .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.chart-wrap{position:relative;height:330px} .chart-wrap.tall{height:390px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+select{appearance:none;border:1px solid var(--line);background:var(--paper);padding:10px 12px;color:var(--ink);font:inherit}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);font-size:12px;background:var(--paper)}
+.pill.warn{border-color:#dfc79e;background:#fff7e9;color:#795520}
+.insight{padding:18px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:190px 1fr;gap:18px}
+.insight strong{font-size:13px} .insight p{margin:0;color:var(--muted)}
+.big-number{font-size:52px;line-height:1;letter-spacing:-.06em;font-weight:750;margin:12px 0 8px}
+.small{font-size:12px;color:var(--muted)}
+.table{width:100%;border-collapse:collapse;font-size:13px} .table th,.table td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left} .table th{color:var(--muted);font-weight:600} .right{text-align:right!important;font-variant-numeric:tabular-nums}
+.good{color:var(--green)} .warntext{color:var(--amber)} .bad{color:var(--red)}
+.footer-note{padding:26px 0 50px;color:var(--muted);font-size:12px}
+.reveal{opacity:0;transform:translateY(22px)}
+@media(max-width:900px){.hero,.section-head,.grid2,.grid3{grid-template-columns:1fr} .metrics{grid-template-columns:1fr 1fr} .metric:nth-child(2){border-right:0}}
+@media(max-width:600px){.container{width:min(100% - 22px,1180px)} nav{align-items:flex-start;flex-direction:column} .metrics{grid-template-columns:1fr} .metric,.metric:not(:first-child){padding:16px 0;border-right:0;border-bottom:1px solid var(--line)} .metric:last-child{border-bottom:0} .chart-wrap{height:280px} .insight{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="container"><nav>
+<div class="brand">Painel financeiro <small>• dados até 06/09/2026</small></div>
+<div class="links"><a href="#historico">Histórico</a><a href="#futuro">Futuro</a><a href="#saudavel">Plano saudável</a><a href="#2027">2027</a></div>
+</nav></div></header>
+
+<main>
+<div class="container">
+<section class="hero">
+<div class="reveal"><div class="kicker">Seu panorama, sem excesso de ruído</div>
+<h1>O dinheiro fica mais simples quando o futuro já entra na conta.</h1>
+<p>Este painel junta o que já saiu, o que já está contratado e o que precisa ser reservado. A ideia não é vigiar cada café — é saber quanto da sua renda já tem destino antes de decidir o próximo gasto.</p></div>
+<div class="hero-note reveal">Para preservar privacidade no link público, o painel usa apenas números agregados. Nenhum CPF, número de conta, endereço ou nome de terceiros foi publicado.</div>
+</section>
+
+<div class="metrics reveal">
+<div class="metric"><span>Renda líquida de referência</span><strong>R$ 18.421</strong></div>
+<div class="metric"><span>Média de saídas Jan–Ago</span><strong>R$ 11.926</strong></div>
+<div class="metric"><span>Custo de vida normalizado</span><strong>R$ 9.574</strong></div>
+<div class="metric"><span>Meta saudável 2027</span><strong>R$ 8.895</strong></div>
+</div>
+
+<section id="historico">
+<div class="section-head"><div class="n">01 / 2026</div><div><h2>O que os dados de 2026 mostram.</h2><p>O extrato consolidado foi usado como base de caixa. Transferências entre contas próprias foram removidas. Setembro está incompleto e fica sinalizado como período parcial.</p></div></div>
+
+<div class="controls reveal">
+<select id="preset">
+<option value="complete">Jan–Ago/26 — meses completos</option>
+<option value="last3">Jun–Ago/26 — últimos 3 completos</option>
+<option value="available">Jan–Set/26 — tudo disponível</option>
+<option value="sep">Set/26 — parcial</option>
+<option value="custom">Personalizado</option>
+</select>
+<select id="startMonth"></select><select id="endMonth"></select>
+<span class="pill warn" id="partialPill" style="display:none">Setembro é parcial até 06/09</span>
+</div>
+
+<div class="grid2">
+<div class="panel reveal"><h3>Gastos por categoria</h3><div class="sub">O gráfico reage ao período escolhido.</div><div class="chart-wrap tall"><canvas id="categoryChart"></canvas></div></div>
+<div class="panel reveal"><h3>Evolução mensal</h3><div class="sub">Saídas de caixa após excluir transferências entre contas próprias.</div><div class="chart-wrap tall"><canvas id="trendChart"></canvas></div></div>
+</div>
+
+<div class="grid3" style="margin-top:18px">
+<div class="panel reveal"><h3>Últimos 3 meses completos</h3><div class="sub">Junho, julho e agosto.</div><div class="chart-wrap"><canvas id="last3Chart"></canvas></div></div>
+<div class="panel reveal"><h3>Leitura rápida</h3><div class="big-number">R$ 12.964</div><div class="small">média Jun–Ago/26</div><div class="insight"><strong>Julho puxou para cima</strong><p>R$ 15.818 foi o maior mês completo observado.</p></div><div class="insight"><strong>Agosto corrigiu</strong><p>R$ 10.056, queda de 36,4% contra julho.</p></div></div>
+<div class="panel reveal"><h3>Qualidade dos dados</h3><div class="big-number">R$ 11.210</div><div class="small">transferências a terceiros ainda “a classificar” no período disponível</div><div class="insight"><strong>Importante</strong><p>Não trato automaticamente Pix para terceiros como consumo. O painel mantém essa parcela separada para não inventar categorias.</p></div></div>
+</div>
+</section>
+
+<section id="futuro">
+<div class="section-head"><div class="n">02 / próximos meses</div><div><h2>O que já está comprometido.</h2><p>Cartões, Amil, SCIRE, Caixa e provisões do imóvel entram antes do gasto discricionário. O gráfico abaixo não inclui mercado, alimentação, transporte nem outros gastos do dia a dia.</p></div></div>
+<div class="grid2">
+<div class="panel reveal"><h3>Outubro a dezembro de 2026</h3><div class="sub">Compromissos conhecidos + reserva mensal da parcela anual SCIRE.</div><div class="chart-wrap"><canvas id="future2026Chart"></canvas></div></div>
+<div class="panel reveal"><h3>O aperto é temporário</h3>
+<table class="table"><thead><tr><th>Mês</th><th class="right">Compromissos</th><th class="right">Sobra antes de férias/13º*</th></tr></thead>
+<tbody><tr><td>Out/26</td><td class="right">R$ 8.279</td><td class="right bad">~R$ 568</td></tr><tr><td>Nov/26</td><td class="right">R$ 6.331</td><td class="right warntext">~R$ 2.517</td></tr><tr><td>Dez/26</td><td class="right">R$ 5.931</td><td class="right warntext">~R$ 2.916</td></tr></tbody></table>
+<p class="small">* usando o custo de vida normalizado de R$ 9.574/mês. A reserva SCIRE 2026 foi suavizada em R$ 2.048,73/mês no planejamento.</p>
+<div class="insight"><strong>Amil</strong><p>R$ 1.384,84/mês. Na conciliação, a identificação é pelo nome da movimentação; valores acima da base por atraso ficam como juros/multa, não como nova mensalidade.</p></div>
+</div>
+</div>
+</section>
+
+<section id="saudavel">
+<div class="section-head"><div class="n">03 / orçamento saudável</div><div><h2>Gastar melhor sem transformar a vida em planilha.</h2><p>O alvo sugerido para o custo de vida do dia a dia é cerca de R$ 8.895/mês. Isso fica abaixo da média normalizada de 2026 e cria uma folga de aproximadamente R$ 378/mês dentro do teto saudável médio de 2027.</p></div></div>
+<div class="grid2">
+<div class="panel reveal"><h3>Atual x sugestão mensal</h3><div class="sub">A redução proposta é concentrada onde existe mais flexibilidade.</div><div class="chart-wrap tall"><canvas id="healthyChart"></canvas></div></div>
+<div class="panel reveal"><h3>Como a renda deveria ser distribuída em 2027</h3><div class="sub">Média mensal, considerando o que já sabemos hoje.</div><div class="chart-wrap tall"><canvas id="budgetSplitChart"></canvas></div>
+<div class="insight"><strong>Regra prática</strong><p>Nova parcela de cartão não aumenta seu orçamento. Ela ocupa parte do bloco “custo de vida saudável” dos próximos meses.</p></div>
+</div>
+</div>
+</section>
+
+<section id="2027">
+<div class="section-head"><div class="n">04 / projeção 2027</div><div><h2>2027 melhora nos cartões, mas a Caixa cresce.</h2><p>A projeção usa renda líquida de R$ 18.421,40 constante, parcelas atuais já conhecidas, Amil fixa, SCIRE nominal, reserva mensal para a parcela anual de dezembro, Caixa conforme planilha teórica e R$ 390/mês de provisão de ITBI/registro.</p></div></div>
+
+<div class="panel reveal"><h3>Capacidade mensal em 2027</h3><div class="sub">Compromissos conhecidos, reservas recomendadas e teto de custo de vida para fechar cada mês dentro da renda.</div><div class="chart-wrap tall"><canvas id="forecast2027Chart"></canvas></div></div>
+
+<div class="grid3" style="margin-top:18px">
+<div class="panel reveal"><h3>Renda anual projetada</h3><div class="big-number">R$ 221,1 mil</div><div class="small">se R$ 18.421,40 líquidos/mês se mantiverem</div></div>
+<div class="panel reveal"><h3>Compromissos conhecidos</h3><div class="big-number">R$ 50,8 mil</div><div class="small">Amil + SCIRE + Caixa + cartões atuais + provisão ITBI/registro</div></div>
+<div class="panel reveal"><h3>Reservas recomendadas</h3><div class="big-number">R$ 58,9 mil</div><div class="small">R$ 36,8 mil para férias/“13º” + R$ 22,1 mil de reserva financeira de 10%</div></div>
+</div>
+
+<div class="insight reveal"><strong>O principal ajuste</strong><p>Seu custo de vida normalizado de 2026 ficou em cerca de R$ 9.574/mês. O teto saudável médio de 2027 é ~R$ 9.273/mês; o plano sugerido de R$ 8.895 deixa uma pequena margem adicional e absorve melhor o crescimento da Caixa ao longo do ano.</p></div>
+<div class="insight reveal"><strong>SCIRE</strong><p>Os valores contratuais são corrigidos pelo CUB até a entrega das chaves. A projeção usa os valores-base conhecidos; por isso, a diferença de correção deve ser tratada como buffer, não como dinheiro livre.</p></div>
+</section>
+
+<section>
+<div class="section-head"><div class="n">05 / metodologia</div><div><h2>O que entrou — e o que não foi inventado.</h2><p>O painel prefere uma estimativa conservadora a uma classificação falsa.</p></div></div>
+<div class="grid2">
+<div class="panel reveal"><h3>Incluído</h3><p class="sub">Extrato consolidado Inter de 28/12/2025 a 06/09/2026; pastas mensais 01–09/2026; faturas futuras Nubank; prints do C6; Amil; contrato SCIRE; planilha Caixa; planejamento de ITBI/registro; renda líquida de agosto/2026.</p></div>
+<div class="panel reveal"><h3>Limitações</h3><p class="sub">Setembro é parcial. Duas digitalizações recentes da pasta 09/2026 não tinham texto extraível e não foram adicionadas isoladamente para evitar dupla contagem. Um PDF bancário protegido segue fora da análise. Compras futuras novas também não existem na projeção até serem registradas.</p></div>
+</div>
+</section>
+
+<div class="footer-note">Painel gerado em 06/09/2026. Este é um instrumento de planejamento, não uma demonstração contábil. Valores futuros podem mudar por CUB, IPCA, reajustes, novas compras, alterações de renda e encargos.</div>
+</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+const RAW = {"monthTotals": {"2026-01": 15428.01, "2026-02": 9761.52, "2026-03": 10373.92, "2026-04": 6429.77, "2026-05": 14518.95, "2026-06": 13019.16, "2026-07": 15818.36, "2026-08": 10055.57, "2026-09": 2506.0}, "categoryByMonth": {"2026-01": {"Academia": 99.9, "Alimentação fora": 554.59, "Compras": 31.8, "Faturas de cartão": 2446.85, "Impostos": 683.73, "Imóvel — SCIRE": 637.13, "Lazer / família": 50.0, "Mercado": 1540.54, "Moradia & contas": 7347.63, "Outros": 389.75, "Pets": 130.8, "Saúde": 272.64, "Transferências / a classificar": 884.51, "Transporte & combustível": 358.14}, "2026-02": {"Alimentação fora": 594.04, "Compras": 155.0, "Faturas de cartão": 794.48, "Hobby / música": 55.5, "Impostos": 58.63, "Imóvel — SCIRE": 638.53, "Lazer / família": 24.0, "Mercado": 980.38, "Moradia & contas": 3979.22, "Outros": 289.24, "Pets": 124.8, "Saúde": 153.6, "Transferências / a classificar": 1554.4, "Transporte & combustível": 359.7}, "2026-03": {"Alimentação fora": 831.96, "Compras": 59.9, "Doações / igreja": 125.0, "Educação": 80.4, "Faturas de cartão": 892.14, "Impostos": 487.18, "Imóvel — SCIRE": 640.48, "Lazer / família": 33.56, "Mercado": 1006.91, "Moradia & contas": 4364.75, "Outros": 78.0, "Pets": 55.91, "Saúde": 364.06, "Transferências / a classificar": 1213.7, "Vestuário": 139.97}, "2026-04": {"Alimentação fora": 551.85, "Compras": 58.8, "Doações / igreja": 100.0, "Faturas de cartão": 2485.25, "Impostos": 297.33, "Imóvel — SCIRE": 642.44, "Lazer / família": 71.0, "Mercado": 1111.25, "Outros": 143.0, "Pets": 34.9, "Saúde": 30.09, "Transferências / a classificar": 603.86, "Transporte & combustível": 300.0}, "2026-05": {"Alimentação fora": 1081.06, "Compras": 1455.58, "Cuidados pessoais": 105.0, "Doações / igreja": 1680.0, "Faturas de cartão": 1726.89, "Impostos": 87.05, "Imóvel — SCIRE": 648.02, "Mercado": 1086.29, "Moradia & contas": 4663.01, "Outros": 269.89, "Pets": 54.9, "Saúde": 408.32, "Transferências / a classificar": 1152.95, "Transporte & combustível": 99.99}, "2026-06": {"Alimentação fora": 801.62, "Compras": 760.16, "Doações / igreja": 50.0, "Educação": 300.0, "Faturas de cartão": 2114.61, "Impostos": 121.7, "Imóvel — SCIRE": 654.82, "Lazer / família": 70.5, "Mercado": 1118.64, "Moradia & contas": 4443.04, "Outros": 277.91, "Pets": 124.89, "Saúde": 238.56, "Transferências / a classificar": 1756.51, "Transporte & combustível": 66.3, "Vestuário": 119.9}, "2026-07": {"Alimentação fora": 604.83, "Compras": 38.23, "Educação": 32.3, "Faturas de cartão": 2046.18, "Impostos": 208.01, "Imóvel — SCIRE": 660.18, "Lazer / família": 140.0, "Mercado": 842.46, "Moradia & contas": 8593.62, "Outros": 326.97, "Saúde": 194.49, "Transferências / a classificar": 1895.1, "Transporte & combustível": 100.0, "Vestuário": 39.99, "Viagens / hospedagem": 96.0}, "2026-08": {"Alimentação fora": 308.36, "Cuidados pessoais": 216.8, "Faturas de cartão": 1119.71, "Imóvel — SCIRE": 666.45, "Lazer / família": 25.0, "Mercado": 622.56, "Moradia & contas": 4757.5, "Outros": 500.23, "Pets": 175.77, "Saúde": 377.39, "Transferências / a classificar": 1254.7, "Transporte & combustível": 31.1}, "2026-09": {"Alimentação fora": 70.99, "Impostos": 178.42, "Imóvel — SCIRE": 668.06, "Mercado": 380.97, "Outros": 160.8, "Saúde": 52.26, "Transferências / a classificar": 894.5, "Transporte & combustível": 100.0}}};
+const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const months = Object.keys(RAW.monthTotals);
+const monthNames = {'2026-01':'Jan/26','2026-02':'Fev/26','2026-03':'Mar/26','2026-04':'Abr/26','2026-05':'Mai/26','2026-06':'Jun/26','2026-07':'Jul/26','2026-08':'Ago/26','2026-09':'Set/26*'};
+Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+Chart.defaults.color = '#687069';
+Chart.defaults.borderColor = '#d9d7d0';
+
+const startSel=document.getElementById('startMonth'), endSel=document.getElementById('endMonth'), preset=document.getElementById('preset'), partial=document.getElementById('partialPill');
+months.forEach(m=>{ startSel.add(new Option(monthNames[m],m)); endSel.add(new Option(monthNames[m],m)); });
+startSel.value='2026-01'; endSel.value='2026-08';
+
+function aggregateCategories(selected){
+  const out={};
+  selected.forEach(m=>Object.entries(RAW.categoryByMonth[m]||{}).forEach(([k,v])=>out[k]=(out[k]||0)+v));
+  return Object.entries(out).sort((a,b)=>b[1]-a[1]);
+}
+function selectedMonths(){
+  const a=months.indexOf(startSel.value), b=months.indexOf(endSel.value);
+  return months.slice(Math.min(a,b),Math.max(a,b)+1);
+}
+const categoryChart=new Chart(document.getElementById('categoryChart'),{
+ type:'bar',data:{labels:[],datasets:[{data:[],backgroundColor:'#2f6d50',borderRadius:2}]},
+ options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>BRL.format(c.raw)}}},scales:{x:{ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'},grid:{color:'#e4e1da'}},y:{grid:{display:false}}}}
+});
+const trendChart=new Chart(document.getElementById('trendChart'),{
+ type:'line',data:{labels:[],datasets:[{data:[],borderColor:'#51728c',backgroundColor:'rgba(81,114,140,.12)',fill:true,tension:.28,pointRadius:4,pointBackgroundColor:'#51728c'}]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>BRL.format(c.raw)}}},scales:{y:{ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'},grid:{color:'#e4e1da'}},x:{grid:{display:false}}}}
+});
+function updateHistory(){
+ const sel=selectedMonths();
+ const cats=aggregateCategories(sel).slice(0,12);
+ categoryChart.data.labels=cats.map(x=>x[0]); categoryChart.data.datasets[0].data=cats.map(x=>x[1]); categoryChart.update();
+ trendChart.data.labels=sel.map(m=>monthNames[m]); trendChart.data.datasets[0].data=sel.map(m=>RAW.monthTotals[m]); trendChart.update();
+ partial.style.display=sel.includes('2026-09')?'inline-flex':'none';
+}
+function applyPreset(v){
+ if(v==='complete'){startSel.value='2026-01';endSel.value='2026-08'}
+ if(v==='last3'){startSel.value='2026-06';endSel.value='2026-08'}
+ if(v==='available'){startSel.value='2026-01';endSel.value='2026-09'}
+ if(v==='sep'){startSel.value='2026-09';endSel.value='2026-09'}
+ updateHistory();
+}
+preset.addEventListener('change',()=>applyPreset(preset.value));
+[startSel,endSel].forEach(el=>el.addEventListener('change',()=>{preset.value='custom';updateHistory()}));
+updateHistory();
+
+new Chart(document.getElementById('last3Chart'),{
+ type:'bar',data:{labels:['Jun/26','Jul/26','Ago/26'],datasets:[{data:[13019.16,15818.36,10055.57],backgroundColor:['#8faf99','#2f6d50','#51728c'],borderRadius:3}]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>BRL.format(c.raw)}}},scales:{y:{ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'},grid:{color:'#e4e1da'}},x:{grid:{display:false}}}}
+});
+new Chart(document.getElementById('future2026Chart'),{
+ type:'bar',data:{labels:['Out/26','Nov/26','Dez/26'],datasets:[{label:'Compromissos conhecidos',data:[8279.09,6330.95,5931.37],backgroundColor:'#b67a2f',borderRadius:3},{label:'Custo de vida normalizado',data:[9573.89,9573.89,9573.89],backgroundColor:'#d8ddd7',borderRadius:3}]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+BRL.format(c.raw)}}},scales:{y:{stacked:true,ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'},grid:{color:'#e4e1da'}},x:{stacked:true,grid:{display:false}}}}
+});
+
+const actual=[4768.6,1038.63,666.04,319.93,254.89,244.38,164.4,87.75,51.76,160.72,1573.84,242.95];
+const target=[4700,1000,500,200,300,245,200,100,150,250,1000,250];
+const healthyLabels=['Moradia & contas','Mercado','Alimentação fora','Compras','Saúde variável','Doações','Transporte','Pets','Lazer/família','Educação/cuidados/etc.','Transferências/outros','Impostos'];
+new Chart(document.getElementById('healthyChart'),{
+ type:'bar',data:{labels:healthyLabels,datasets:[{label:'Média 2026',data:actual,backgroundColor:'#b9b7b0'},{label:'Sugestão',data:target,backgroundColor:'#2f6d50'}]},
+ options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+BRL.format(c.raw)}}},scales:{x:{ticks:{callback:v=>'R$ '+(v/1000).toFixed(1)+'k'},grid:{color:'#e4e1da'}},y:{grid:{display:false}}}}
+});
+new Chart(document.getElementById('budgetSplitChart'),{
+ type:'doughnut',data:{labels:['Custo de vida sugerido','Compromissos conhecidos','Férias + “13º”','Reserva financeira / folga'],datasets:[{data:[8895,4236.17,3070.23,2220],backgroundColor:['#2f6d50','#b67a2f','#51728c','#b9b7b0'],borderWidth:0}]},
+ options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{tooltip:{callbacks:{label:c=>c.label+': '+BRL.format(c.raw)}}}}
+});
+
+const m27=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const commitments=[4380.09,3796.52,3892.55,4014.43,3907.61,3971.41,4116.57,4273.16,4433.83,4528.11,4684.34,4835.40];
+const reserves=Array(12).fill(4912.37); // férias+13 + 10% reserva
+const healthyCap=[9128.94,9712.51,9616.48,9494.60,9601.41,9537.61,9392.46,9235.86,9075.20,8980.92,8824.69,8673.63];
+new Chart(document.getElementById('forecast2027Chart'),{
+ type:'bar',
+ data:{labels:m27,datasets:[
+  {type:'bar',label:'Compromissos conhecidos',data:commitments,backgroundColor:'#b67a2f',stack:'cash'},
+  {type:'bar',label:'Reservas recomendadas',data:reserves,backgroundColor:'#8ea3b3',stack:'cash'},
+  {type:'bar',label:'Teto de custo de vida',data:healthyCap,backgroundColor:'#8faf99',stack:'cash'},
+  {type:'line',label:'Renda líquida',data:Array(12).fill(18421.40),borderColor:'#1d211e',borderWidth:2,pointRadius:0,tension:0}
+ ]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+BRL.format(c.raw)}}},scales:{y:{stacked:true,max:20000,ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'},grid:{color:'#e4e1da'}},x:{stacked:true,grid:{display:false}}}}
+});
+
+if(window.gsap){
+ gsap.registerPlugin(ScrollTrigger);
+ gsap.to('.reveal',{opacity:1,y:0,duration:.7,stagger:.04,ease:'power2.out'});
+ document.querySelectorAll('section .reveal').forEach(el=>gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.65,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
+}
+</script>
+</body>
+</html>
