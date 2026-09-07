@@ -96,8 +96,21 @@ select{appearance:none;border:1px solid var(--line);background:var(--paper);padd
 <div class="grid3" style="margin-top:18px">
 <div class="panel reveal"><h3>Últimos 3 meses completos</h3><div class="sub">Junho, julho e agosto.</div><div class="chart-wrap"><canvas id="last3Chart"></canvas></div></div>
 <div class="panel reveal"><h3>Leitura rápida</h3><div class="big-number">R$ 12.964</div><div class="small">média Jun–Ago/26</div><div class="insight"><strong>Julho puxou para cima</strong><p>R$ 15.818 foi o maior mês completo observado.</p></div><div class="insight"><strong>Agosto corrigiu</strong><p>R$ 10.056, queda de 36,4% contra julho.</p></div></div>
-<div class="panel reveal"><h3>Qualidade dos dados</h3><div class="big-number">R$ 11.210</div><div class="small">transferências a terceiros ainda “a classificar” no período disponível</div><div class="insight"><strong>Importante</strong><p>Não trato automaticamente Pix para terceiros como consumo. O painel mantém essa parcela separada para não inventar categorias.</p></div></div>
+<div class="panel reveal"><h3>Qualidade dos dados</h3><div class="big-number">R$ 754</div><div class="small">outras transferências ainda “a classificar” no período disponível</div><div class="insight"><strong>Conciliação atualizada</strong><p>Foram categorizadas 86 transferências identificadas, somando R$ 11.428,72. Desse total, R$ 10.466,22 foram redistribuídos no gráfico; R$ 962,50 de movimentações do Nubank permanecem fora da soma consolidada para evitar duplicidade.</p></div></div>
 </div>
+
+<div class="panel reveal" style="margin-top:18px"><h3>Transferências categorizadas</h3><div class="sub">Classificação informada pelo titular, sem publicar nomes de terceiros.</div>
+<table class="table"><thead><tr><th>Categoria</th><th class="right">Valor identificado</th></tr></thead><tbody>
+<tr><td>Despesas da esposa</td><td class="right">R$ 8.013,52</td></tr>
+<tr><td>Igreja</td><td class="right">R$ 770,00</td></tr>
+<tr><td>Moradia</td><td class="right">R$ 720,00</td></tr>
+<tr><td>Lazer</td><td class="right">R$ 650,00</td></tr>
+<tr><td>Assinaturas digitais — Netflix</td><td class="right">R$ 410,20</td></tr>
+<tr><td>Alimentação</td><td class="right">R$ 469,00</td></tr>
+<tr><td>Compras</td><td class="right">R$ 381,00</td></tr>
+<tr><td>Estacionamento</td><td class="right">R$ 15,00</td></tr>
+<tr><th>Total identificado</th><th class="right">R$ 11.428,72</th></tr>
+</tbody></table></div>
 </section>
 
 <section id="futuro">
@@ -146,7 +159,7 @@ select{appearance:none;border:1px solid var(--line);background:var(--paper);padd
 </div>
 </section>
 
-<div class="footer-note">Painel gerado em 06/09/2026. Este é um instrumento de planejamento, não uma demonstração contábil. Valores futuros podem mudar por CUB, IPCA, reajustes, novas compras, alterações de renda e encargos.</div>
+<div class="footer-note">Painel atualizado em 07/09/2026. Este é um instrumento de planejamento, não uma demonstração contábil. Valores futuros podem mudar por CUB, IPCA, reajustes, novas compras, alterações de renda e encargos.</div>
 </div>
 </main>
 
@@ -155,6 +168,24 @@ select{appearance:none;border:1px solid var(--line);background:var(--paper);padd
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script>
 const RAW = {"monthTotals": {"2026-01": 15428.01, "2026-02": 9761.52, "2026-03": 10373.92, "2026-04": 6429.77, "2026-05": 14518.95, "2026-06": 13019.16, "2026-07": 15818.36, "2026-08": 10055.57, "2026-09": 2506.0}, "categoryByMonth": {"2026-01": {"Academia": 99.9, "Alimentação fora": 554.59, "Compras": 31.8, "Faturas de cartão": 2446.85, "Impostos": 683.73, "Imóvel — SCIRE": 637.13, "Lazer / família": 50.0, "Mercado": 1540.54, "Moradia & contas": 7347.63, "Outros": 389.75, "Pets": 130.8, "Saúde": 272.64, "Transferências / a classificar": 884.51, "Transporte & combustível": 358.14}, "2026-02": {"Alimentação fora": 594.04, "Compras": 155.0, "Faturas de cartão": 794.48, "Hobby / música": 55.5, "Impostos": 58.63, "Imóvel — SCIRE": 638.53, "Lazer / família": 24.0, "Mercado": 980.38, "Moradia & contas": 3979.22, "Outros": 289.24, "Pets": 124.8, "Saúde": 153.6, "Transferências / a classificar": 1554.4, "Transporte & combustível": 359.7}, "2026-03": {"Alimentação fora": 831.96, "Compras": 59.9, "Doações / igreja": 125.0, "Educação": 80.4, "Faturas de cartão": 892.14, "Impostos": 487.18, "Imóvel — SCIRE": 640.48, "Lazer / família": 33.56, "Mercado": 1006.91, "Moradia & contas": 4364.75, "Outros": 78.0, "Pets": 55.91, "Saúde": 364.06, "Transferências / a classificar": 1213.7, "Vestuário": 139.97}, "2026-04": {"Alimentação fora": 551.85, "Compras": 58.8, "Doações / igreja": 100.0, "Faturas de cartão": 2485.25, "Impostos": 297.33, "Imóvel — SCIRE": 642.44, "Lazer / família": 71.0, "Mercado": 1111.25, "Outros": 143.0, "Pets": 34.9, "Saúde": 30.09, "Transferências / a classificar": 603.86, "Transporte & combustível": 300.0}, "2026-05": {"Alimentação fora": 1081.06, "Compras": 1455.58, "Cuidados pessoais": 105.0, "Doações / igreja": 1680.0, "Faturas de cartão": 1726.89, "Impostos": 87.05, "Imóvel — SCIRE": 648.02, "Mercado": 1086.29, "Moradia & contas": 4663.01, "Outros": 269.89, "Pets": 54.9, "Saúde": 408.32, "Transferências / a classificar": 1152.95, "Transporte & combustível": 99.99}, "2026-06": {"Alimentação fora": 801.62, "Compras": 760.16, "Doações / igreja": 50.0, "Educação": 300.0, "Faturas de cartão": 2114.61, "Impostos": 121.7, "Imóvel — SCIRE": 654.82, "Lazer / família": 70.5, "Mercado": 1118.64, "Moradia & contas": 4443.04, "Outros": 277.91, "Pets": 124.89, "Saúde": 238.56, "Transferências / a classificar": 1756.51, "Transporte & combustível": 66.3, "Vestuário": 119.9}, "2026-07": {"Alimentação fora": 604.83, "Compras": 38.23, "Educação": 32.3, "Faturas de cartão": 2046.18, "Impostos": 208.01, "Imóvel — SCIRE": 660.18, "Lazer / família": 140.0, "Mercado": 842.46, "Moradia & contas": 8593.62, "Outros": 326.97, "Saúde": 194.49, "Transferências / a classificar": 1895.1, "Transporte & combustível": 100.0, "Vestuário": 39.99, "Viagens / hospedagem": 96.0}, "2026-08": {"Alimentação fora": 308.36, "Cuidados pessoais": 216.8, "Faturas de cartão": 1119.71, "Imóvel — SCIRE": 666.45, "Lazer / família": 25.0, "Mercado": 622.56, "Moradia & contas": 4757.5, "Outros": 500.23, "Pets": 175.77, "Saúde": 377.39, "Transferências / a classificar": 1254.7, "Transporte & combustível": 31.1}, "2026-09": {"Alimentação fora": 70.99, "Impostos": 178.42, "Imóvel — SCIRE": 668.06, "Mercado": 380.97, "Outros": 160.8, "Saúde": 52.26, "Transferências / a classificar": 894.5, "Transporte & combustível": 100.0}}};
+const RECLASSIFIED = {
+  "2026-01":{"Despesas da esposa":580.31,"Assinaturas digitais — Netflix":26.20,"Alimentação":32.00,"Compras":246.00},
+  "2026-02":{"Despesas da esposa":777.90,"Moradia":720.00,"Assinaturas digitais — Netflix":26.50,"Alimentação":30.00},
+  "2026-03":{"Despesas da esposa":785.70,"Lazer":37.50,"Assinaturas digitais — Netflix":26.50,"Alimentação":122.00},
+  "2026-04":{"Despesas da esposa":489.61,"Estacionamento":15.00},
+  "2026-05":{"Despesas da esposa":731.70,"Lazer":50.00,"Assinaturas digitais — Netflix":53.00,"Alimentação":135.00},
+  "2026-06":{"Despesas da esposa":1380.26,"Igreja":200.00,"Lazer":50.00,"Alimentação":27.00},
+  "2026-07":{"Despesas da esposa":1474.84,"Assinaturas digitais — Netflix":225.00,"Compras":85.00},
+  "2026-08":{"Despesas da esposa":945.20,"Igreja":70.00,"Lazer":50.00,"Assinaturas digitais — Netflix":26.50,"Alimentação":93.00,"Compras":50.00},
+  "2026-09":{"Despesas da esposa":848.00,"Assinaturas digitais — Netflix":26.50,"Alimentação":20.00}
+};
+Object.entries(RECLASSIFIED).forEach(([month,categories])=>{
+  const monthly=RAW.categoryByMonth[month];
+  const moved=Object.values(categories).reduce((sum,value)=>sum+value,0);
+  monthly["Transferências / a classificar"]=Math.round((monthly["Transferências / a classificar"]-moved)*100)/100;
+  Object.entries(categories).forEach(([category,value])=>monthly[category]=Math.round(((monthly[category]||0)+value)*100)/100);
+  if(monthly["Transferências / a classificar"]===0) delete monthly["Transferências / a classificar"];
+});
 const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
 const months = Object.keys(RAW.monthTotals);
 const monthNames = {'2026-01':'Jan/26','2026-02':'Fev/26','2026-03':'Mar/26','2026-04':'Abr/26','2026-05':'Mai/26','2026-06':'Jun/26','2026-07':'Jul/26','2026-08':'Ago/26','2026-09':'Set/26*'};
